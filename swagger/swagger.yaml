@@ -1,0 +1,97 @@
+consumes:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+definitions:
+  productReviewPayload:
+    description: ProductReviewPayload is the type used
+    example:
+      content: c1ctnsbxv4
+      customer_id: 1
+      product_id: 1
+      rating: 4
+      title: ae9l6
+    properties:
+      content:
+        description: Content of review
+        example: c1ctnsbxv4
+        minLength: 50
+        type: string
+      customer_id:
+        description: customer_id create review
+        example: 1
+        minimum: 1
+        type: integer
+      product_id:
+        description: product_id of review
+        example: 1
+        minimum: 1
+        type: integer
+      rating:
+        description: rating create review
+        example: 4
+        maximum: 5
+        minimum: 1
+        type: integer
+      title:
+        description: Title of review
+        example: ae9l6
+        minLength: 5
+        type: string
+    required:
+    - title
+    - content
+    - rating
+    - customer_id
+    title: productReviewPayload
+    type: object
+host: localhost:8080
+info:
+  description: The product review service
+  version: ""
+paths:
+  /reviews/:
+    post:
+      description: creates a review
+      operationId: review#create
+      parameters:
+      - description: ProductReviewPayload is the type used
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/productReviewPayload'
+      responses:
+        "201":
+          description: Created
+      summary: create review
+      tags:
+      - review
+  /reviews/{id}:
+    get:
+      description: Get a review
+      operationId: review#show
+      parameters:
+      - description: Review ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+      summary: show review
+      tags:
+      - review
+produces:
+- application/json
+- application/xml
+- application/gob
+- application/x-gob
+responses:
+  Created:
+    description: Created
+swagger: "2.0"

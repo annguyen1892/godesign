@@ -1,3 +1,4 @@
+
 package design
 
 import . "github.com/goadesign/goa/design"
@@ -64,7 +65,7 @@ var _ = Resource("review", func() {
 		Description("Get a review")
 		Routing(GET("/:id"))
     Params(function(){
-      Param("id", Integer)
+      Param("id", Integer, "Review Id")
     })
 		Response(OK, productReviewPayload)
 	})
